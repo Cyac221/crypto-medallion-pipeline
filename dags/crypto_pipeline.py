@@ -55,10 +55,9 @@ with DAG(
     bronze_to_silver_task = BashOperator(
         task_id="bronze_to_silver",
         bash_command="""
-            docker exec proyecto9-crpytomedalionpipeline-spark-master-1 \
             /opt/spark/bin/spark-submit \
             --master spark://spark-master:7077 \
-            /opt/spark_jobs/bronze_to_silver.py \
+            /opt/airflow/spark_jobs/bronze_to_silver.py \
             /opt/airflow/data/bronze \
             /opt/airflow/data/silver \
             {{ ds }}
@@ -68,10 +67,9 @@ with DAG(
     silver_to_gold_task = BashOperator(
         task_id="silver_to_gold",
         bash_command="""
-            docker exec proyecto9-crpytomedalionpipeline-spark-master-1 \
             /opt/spark/bin/spark-submit \
             --master spark://spark-master:7077 \
-            /opt/spark_jobs/silver_to_gold.py \
+            /opt/airflow/spark_jobs/silver_to_gold.py \
             /opt/airflow/data/silver \
             /opt/airflow/data/gold \
             {{ ds }}
