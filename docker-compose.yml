@@ -52,7 +52,7 @@ services:
     <<: *airflow-common
     command: webserver
     ports:
-      - "8082:8080"
+      - "8083:8080"
     restart: always
     depends_on:
       airflow-init:

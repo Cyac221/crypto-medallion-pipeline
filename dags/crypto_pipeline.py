@@ -53,4 +53,3 @@ with DAG(
     )
 
     extract_python >> validate_bronze
-
