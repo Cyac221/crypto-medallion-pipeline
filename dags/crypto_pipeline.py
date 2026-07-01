@@ -2,6 +2,7 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime,timedelta
+from airflow.operators.bash import BashOperator
 
 default_args = {
     'owner':'Carlos_yepes',
@@ -51,5 +52,30 @@ with DAG(
         task_id = 'validate_bronze',
         python_callable = task_validate_bronze
     )
+    bronze_to_silver_task = BashOperator(
+        task_id="bronze_to_silver",
+        bash_command="""
+            docker exec proyecto9-crpytomedalionpipeline-spark-master-1 \
+            /opt/spark/bin/spark-submit \
+            --master spark://spark-master:7077 \
+            /opt/spark_jobs/bronze_to_silver.py \
+            /opt/airflow/data/bronze \
+            /opt/airflow/data/silver \
+            {{ ds }}
+        """,
+    )
 
-    extract_python >> validate_bronze
+    silver_to_gold_task = BashOperator(
+        task_id="silver_to_gold",
+        bash_command="""
+            docker exec proyecto9-crpytomedalionpipeline-spark-master-1 \
+            /opt/spark/bin/spark-submit \
+            --master spark://spark-master:7077 \
+            /opt/spark_jobs/silver_to_gold.py \
+            /opt/airflow/data/silver \
+            /opt/airflow/data/gold \
+            {{ ds }}
+        """,
+    )
+
+    extract_python >> validate_bronze >> bronze_to_silver_task >> silver_to_gold_task
