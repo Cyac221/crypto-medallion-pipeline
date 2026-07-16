@@ -1,0 +1,18 @@
+[2026-07-16T03:38:28.590+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-16T03:38:28.659+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_medallion_pipeline.validate_bronze manual__2026-07-16T03:38:24.497210+00:00 [queued]>
+[2026-07-16T03:38:28.677+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_medallion_pipeline.validate_bronze manual__2026-07-16T03:38:24.497210+00:00 [queued]>
+[2026-07-16T03:38:28.680+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-16T03:38:28.713+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): validate_bronze> on 2026-07-16 03:38:24.497210+00:00
+[2026-07-16T03:38:28.720+0000] {standard_task_runner.py:63} INFO - Started process 193 to run task
+[2026-07-16T03:38:28.726+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_medallion_pipeline', 'validate_bronze', 'manual__2026-07-16T03:38:24.497210+00:00', '--job-id', '37', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmpoq_n54j7']
+[2026-07-16T03:38:28.731+0000] {standard_task_runner.py:91} INFO - Job 37: Subtask validate_bronze
+[2026-07-16T03:38:28.841+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_medallion_pipeline.validate_bronze manual__2026-07-16T03:38:24.497210+00:00 [running]> on host 49dea0aecf55
+[2026-07-16T03:38:29.040+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Carlos_yepes' AIRFLOW_CTX_DAG_ID='crypto_medallion_pipeline' AIRFLOW_CTX_TASK_ID='validate_bronze' AIRFLOW_CTX_EXECUTION_DATE='2026-07-16T03:38:24.497210+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-16T03:38:24.497210+00:00'
+[2026-07-16T03:38:29.042+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-16T03:38:29.302+0000] {logging_mixin.py:188} INFO - Valitadios passeed - 100 records found
+[2026-07-16T03:38:29.303+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-07-16T03:38:29.304+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-16T03:38:29.324+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_medallion_pipeline, task_id=validate_bronze, run_id=manual__2026-07-16T03:38:24.497210+00:00, execution_date=20260716T033824, start_date=20260716T033828, end_date=20260716T033829
+[2026-07-16T03:38:29.384+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-07-16T03:38:29.439+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-16T03:38:29.444+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

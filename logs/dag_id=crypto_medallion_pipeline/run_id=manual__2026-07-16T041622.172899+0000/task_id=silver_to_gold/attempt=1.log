@@ -1,0 +1,18 @@
+[2026-07-16T04:16:56.413+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-16T04:16:56.446+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_medallion_pipeline.silver_to_gold manual__2026-07-16T04:16:22.172899+00:00 [queued]>
+[2026-07-16T04:16:56.456+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_medallion_pipeline.silver_to_gold manual__2026-07-16T04:16:22.172899+00:00 [queued]>
+[2026-07-16T04:16:56.458+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-16T04:16:56.473+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): silver_to_gold> on 2026-07-16 04:16:22.172899+00:00
+[2026-07-16T04:16:56.479+0000] {standard_task_runner.py:63} INFO - Started process 1174 to run task
+[2026-07-16T04:16:56.483+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_medallion_pipeline', 'silver_to_gold', 'manual__2026-07-16T04:16:22.172899+00:00', '--job-id', '57', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmpiy6ng4w7']
+[2026-07-16T04:16:56.485+0000] {standard_task_runner.py:91} INFO - Job 57: Subtask silver_to_gold
+[2026-07-16T04:16:56.545+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_medallion_pipeline.silver_to_gold manual__2026-07-16T04:16:22.172899+00:00 [running]> on host 32878a6cc76d
+[2026-07-16T04:16:56.643+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Carlos_yepes' AIRFLOW_CTX_DAG_ID='crypto_medallion_pipeline' AIRFLOW_CTX_TASK_ID='silver_to_gold' AIRFLOW_CTX_EXECUTION_DATE='2026-07-16T04:16:22.172899+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-16T04:16:22.172899+00:00'
+[2026-07-16T04:16:56.644+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-16T04:17:22.787+0000] {logging_mixin.py:188} INFO - Silver → Gold complete for date: 2026-07-16
+[2026-07-16T04:17:23.133+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-07-16T04:17:23.135+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-16T04:17:23.173+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_medallion_pipeline, task_id=silver_to_gold, run_id=manual__2026-07-16T04:16:22.172899+00:00, execution_date=20260716T041622, start_date=20260716T041656, end_date=20260716T041723
+[2026-07-16T04:17:23.235+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-07-16T04:17:23.295+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-16T04:17:23.301+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

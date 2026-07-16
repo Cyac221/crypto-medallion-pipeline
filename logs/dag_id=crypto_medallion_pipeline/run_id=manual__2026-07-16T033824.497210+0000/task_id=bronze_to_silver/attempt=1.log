@@ -1,0 +1,39 @@
+[2026-07-16T03:38:30.014+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-16T03:38:30.058+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_medallion_pipeline.bronze_to_silver manual__2026-07-16T03:38:24.497210+00:00 [queued]>
+[2026-07-16T03:38:30.071+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_medallion_pipeline.bronze_to_silver manual__2026-07-16T03:38:24.497210+00:00 [queued]>
+[2026-07-16T03:38:30.073+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-16T03:38:30.092+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): bronze_to_silver> on 2026-07-16 03:38:24.497210+00:00
+[2026-07-16T03:38:30.100+0000] {standard_task_runner.py:63} INFO - Started process 195 to run task
+[2026-07-16T03:38:30.104+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_medallion_pipeline', 'bronze_to_silver', 'manual__2026-07-16T03:38:24.497210+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmp2jen5s64']
+[2026-07-16T03:38:30.107+0000] {standard_task_runner.py:91} INFO - Job 38: Subtask bronze_to_silver
+[2026-07-16T03:38:30.185+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_medallion_pipeline.bronze_to_silver manual__2026-07-16T03:38:24.497210+00:00 [running]> on host 49dea0aecf55
+[2026-07-16T03:38:30.431+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Carlos_yepes' AIRFLOW_CTX_DAG_ID='crypto_medallion_pipeline' AIRFLOW_CTX_TASK_ID='bronze_to_silver' AIRFLOW_CTX_EXECUTION_DATE='2026-07-16T03:38:24.497210+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-16T03:38:24.497210+00:00'
+[2026-07-16T03:38:30.433+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-16T03:38:30.551+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-16T03:38:30.554+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/crypto_pipeline.py", line 57, in task_bronze_to_silver
+    from spark_jobs.bronze_to_silver import run
+  File "/opt/airflow/spark_jobs/bronze_to_silver.py", line 1, in <module>
+    from pyspark.sql import SparkSession
+ModuleNotFoundError: No module named 'pyspark'
+[2026-07-16T03:38:30.627+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=crypto_medallion_pipeline, task_id=bronze_to_silver, run_id=manual__2026-07-16T03:38:24.497210+00:00, execution_date=20260716T033824, start_date=20260716T033830, end_date=20260716T033830
+[2026-07-16T03:38:30.956+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 38 for task bronze_to_silver (No module named 'pyspark'; 195)
+[2026-07-16T03:38:31.009+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-07-16T03:38:31.059+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-16T03:38:31.065+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
