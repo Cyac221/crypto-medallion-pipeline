@@ -2,7 +2,6 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime,timedelta
-from airflow.operators.bash import BashOperator
 
 default_args = {
     'owner':'Carlos_yepes',
@@ -52,28 +51,34 @@ with DAG(
         task_id = 'validate_bronze',
         python_callable = task_validate_bronze
     )
-    bronze_to_silver_task = BashOperator(
-        task_id="bronze_to_silver",
-        bash_command="""
-            /opt/spark/bin/spark-submit \
-            --master spark://spark-master:7077 \
-            /opt/airflow/spark_jobs/bronze_to_silver.py \
-            /opt/airflow/data/bronze \
-            /opt/airflow/data/silver \
-            {{ ds }}
-        """,
+    def task_bronze_to_silver(**context):
+        import sys
+        sys.path.insert(0, '/opt/airflow')
+        from spark_jobs.bronze_to_silver import run
+        run(
+            bronze_path='/opt/airflow/data/bronze',
+            silver_path='/opt/airflow/data/silver',
+            date=context['ds']
+        )
+
+    bronze_to_silver_task = PythonOperator(
+        task_id='bronze_to_silver',
+        python_callable=task_bronze_to_silver,
     )
 
-    silver_to_gold_task = BashOperator(
-        task_id="silver_to_gold",
-        bash_command="""
-            /opt/spark/bin/spark-submit \
-            --master spark://spark-master:7077 \
-            /opt/airflow/spark_jobs/silver_to_gold.py \
-            /opt/airflow/data/silver \
-            /opt/airflow/data/gold \
-            {{ ds }}
-        """,
+    def task_silver_to_gold(**context):
+        import sys
+        sys.path.insert(0, '/opt/airflow')
+        from spark_jobs.silver_to_gold import run
+        run(
+            silver_path='/opt/airflow/data/silver',
+            gold_path='/opt/airflow/data/gold',
+            date=context['ds']
+        )
+
+    silver_to_gold_task = PythonOperator(
+        task_id='silver_to_gold',
+        python_callable=task_silver_to_gold,
     )
 
     extract_python >> validate_bronze >> bronze_to_silver_task >> silver_to_gold_task

@@ -6,7 +6,7 @@ def create_spark_session():
     return (
         SparkSession.builder
         .appName("CryptoMedallion_BronzeToSilver")
-        .master("spark://spark-master:7077")
+        .master("local[*]")
         .getOrCreate()
     )
 

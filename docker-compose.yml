@@ -66,10 +66,12 @@ services:
         condition: service_completed_successfully
   spark-master:
     image: apache/spark:3.5.1
+    hostname: spark-master
     user: root
     environment:
       SPARK_MODE: master
       SPARK_MASTER_HOST: spark-master
+      SPARK_LOCAL_IP: spark-master
     entrypoint: /opt/spark/bin/spark-class
     command: org.apache.spark.deploy.master.Master
     ports:
@@ -82,6 +84,7 @@ services:
 
   spark-worker:
     image: apache/spark:3.5.1
+    hostname: spark-worker
     user: root
     entrypoint: /opt/spark/bin/spark-class
     command: ["org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
